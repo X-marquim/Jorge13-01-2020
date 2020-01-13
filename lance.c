@@ -2,16 +2,26 @@
 #include <string.h>
 #include <stdlib.h>
 
-int main() {
-    int codigo, quantidade;
-    double preco;
-    char produto[128];
+int codigoF() {
+    int codigo;
 
     printf("Codigo do produto: ");
     scanf("%d", &codigo);
+    return codigo;
+}
+int quantidadeF() {
+    int quantidade;
 
     printf("Quantidade: ");
     scanf("%d", &quantidade);
+    return quantidade;
+}
+
+int main() {
+    int codigo = codigoF(), quantidade = quantidadeF();
+
+    double preco, total = 1;
+    char produto[128], escolha[128];
 
     switch (codigo)
     {
@@ -40,9 +50,18 @@ int main() {
         exit(0);
         break;
     }
+    printf("%.2f euros por %d %s/s\n\n", preco * quantidade, quantidade, produto);
 
-    printf("%.2f euros por %d %s/s", preco * quantidade, quantidade, produto);
+    printf("Quer compras mais produtos?");
+    scanf("%s", escolha);
 
+    if (strcmp(escolha,"sim") == 0) {
+        printf("\n\n\n");
+        main();
+    } else {
+        printf("Total: %.2f\n", total);
+        printf("Adeus");
+    }
 
     return 0;
 }
